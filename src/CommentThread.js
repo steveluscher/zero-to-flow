@@ -1,18 +1,9 @@
-// @flow strict-local
-
-import type {Comment} from './server';
-
 import CommentBody from './CommentBody';
 import CommentForm from './CommentForm';
 import * as React from 'react';
 
-type Props = $ReadOnly<{|
-  comment: Comment,
-  depth: number,
-|}>;
-
-class CommentThread extends React.Component<Props> {
-  render(): React.Element<'li'> {
+class CommentThread extends React.Component {
+  render() {
     return (
       <li>
         <CommentBody

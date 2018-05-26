@@ -1,32 +1,22 @@
-// @flow strict-local
-
-import type {Comment} from './server';
-
 import CommentThread from './CommentThread';
 import CommentForm from './CommentForm';
 import * as React from 'react';
 
 import fetchCommentThreads from './fetchCommentThreads';
 
-type Props = empty;
-
-type State = {|
-  comments: $ReadOnlyArray<Comment>,
-|};
-
-class App extends React.Component<Props, State> {
+class App extends React.Component {
   state = {
     comments: [],
   };
-  componentDidMount(): void {
-    const performFetch = async (): Promise<void> => {
+  componentDidMount() {
+    const performFetch = async () => {
       const comments = fetchCommentThreads();
       this.setState({comments});
       setTimeout(300, performFetch);
     };
     performFetch();
   }
-  render(): React.Element<typeof React.Fragment> {
+  render() {
     return (
       <React.Fragment>
         <h1>Join the conversation</h1>

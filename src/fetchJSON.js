@@ -1,9 +1,4 @@
-// @flow strict-local
-
-async function fetchJSON<TResponse, TParams: ?{}>(
-  endpointPath: string,
-  params: TParams,
-): Promise<TResponse> {
+async function fetchJSON(endpointPath, params) {
   return await fetch(endpointPath, {
     body: params,
     credentials: 'include',

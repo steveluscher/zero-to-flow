@@ -1,6 +1,4 @@
-// @flow strict-local
-
-function getPixelRatio(): number {
+function getPixelRatio() {
   return window.devicePixelRatio;
 }
 

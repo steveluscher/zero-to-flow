@@ -1,10 +1,6 @@
-// @flow strict-local
-
-import type {Comment} from './server';
-
 import fetchJSON from './fetchJSON';
 
-async function fetchCommentThreads(): Promise<$ReadOnlyArray<Comment>> {
+async function fetchCommentThreads() {
   return await fetchJSON('/comments');
 }
 

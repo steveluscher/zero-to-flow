@@ -1,35 +1,24 @@
-// @flow strict-local
-
 import * as React from 'react';
 
 import submitComment from './submitComment';
 
-type Props = $ReadOnly<{|
-  parentCommentID: ?number,
-  placeholder?: string,
-|}>;
-
-type State = {|
-  commentText: string,
-|};
-
-class CommentForm extends React.Component<Props, State> {
+class CommentForm extends React.Component {
   state = {
     commentText: '',
   };
-  handleChange = (e: SyntheticInputEvent<>): void => {
+  handleChange = e => {
     this.setState({
       commentText: e.target.value,
     });
   };
-  handleSubmit = async (e: SyntheticEvent<>): Promise<void> => {
+  handleSubmit = async e => {
     e.stop();
     await submitComment(this.state.commentText, this.props.parentCommentID);
     this.setState({
       commentText: null,
     });
   };
-  render(): React.Element<'form'> {
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <input

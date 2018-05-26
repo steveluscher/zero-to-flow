@@ -1,30 +1,18 @@
-// @flow strict-local
-
-import type {NextFunction, $Request, $Response} from 'express';
-
 import CatNames from 'cat-names';
 
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-type CustomRequest = $Request & {|
-  author: Author,
-|};
-
 const app = express();
 
 /**
  * Assign a user account; save it in a session cookie.
  */
-export type Author = {|
-  id: number,
-  name: string,
-|};
-const authors: {[id: number]: Author} = {};
+const authors = {};
 let nextAuthorID = 0;
 app.use(cookieParser(`sekrit-${Date.now()}`));
-app.use((req: CustomRequest, res: $Response, next: NextFunction) => {
+app.use((req, res, next) => {
   const authorID = req.signedCookies['authorID'];
   if (isNaN(authorID)) {
     const authorID = nextAuthorID++;
@@ -41,28 +29,18 @@ app.use((req: CustomRequest, res: $Response, next: NextFunction) => {
 /**
  * Vend the comment thread.
  */
-export type Comment = {|
-  author: Author,
-  id: number,
-  replies: Array<Comment>,
-  text: string,
-|};
-const comments: Array<Comment> = [];
-app.get('/comments', (req: CustomRequest, res: $Response) => {
+const comments = [];
+app.get('/comments', (req, res) => {
   res.json(comments);
 });
 
 /**
  * Add a comment to the thread.
  */
-type CommentMutationParams = {|
-  parentCommentID: ?number,
-  text: string,
-|};
-const commentsIndex: {[id: number]: ?Comment} = {};
+const commentsIndex = {};
 let nextCommentID = 0;
 app.use(bodyParser.json());
-app.post('/comments/add', (req: CustomRequest, res: $Response) => {
+app.post('/comments/add', (req, res) => {
   const parentCommentID = req.body.parentCommentID;
   const text = req.body.text;
   let threadToAppendCommentTo;
