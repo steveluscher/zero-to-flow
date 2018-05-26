@@ -5,7 +5,7 @@ async function fetchJSON<TResponse, TParams: ?{}>(
   params: TParams,
 ): Promise<TResponse> {
   return await fetch(endpointPath, {
-    body: JSON.stringify(params),
+    body: params,
     credentials: 'include',
     headers: {
       'content-type': 'application/json',

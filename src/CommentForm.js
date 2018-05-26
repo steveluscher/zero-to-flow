@@ -23,10 +23,10 @@ class CommentForm extends React.Component<Props, State> {
     });
   };
   handleSubmit = async (e: SyntheticEvent<>): Promise<void> => {
-    e.preventDefault();
+    e.stop();
     await submitComment(this.state.commentText, this.props.parentCommentID);
     this.setState({
-      commentText: '',
+      commentText: null,
     });
   };
   render(): React.Element<'form'> {
@@ -34,7 +34,7 @@ class CommentForm extends React.Component<Props, State> {
       <form onSubmit={this.handleSubmit}>
         <input
           placeholder={this.props.placeholder || 'Write a comment\u2026'}
-          onChange={this.handleChange}
+          onChange={this.handleChange()}
           type="text"
           value={this.state.commentText}
         />

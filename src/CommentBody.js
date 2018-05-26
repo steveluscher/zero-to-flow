@@ -18,7 +18,7 @@ class CommentBody extends React.Component<Props> {
     return (
       <React.Fragment>
         <img
-          alt={`A photo of ${this.props.author.name}`}
+          alt={`A photo of ${this.props.author}`}
           src={`https://api.adorable.io/avatars/${AVATAR_SIZE *
             getPixelRatio()}/${this.props.author.id}@adorable.png`}
           title={this.props.author.name}

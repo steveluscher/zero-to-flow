@@ -1,7 +1,7 @@
 // @flow strict-local
 
 function getPixelRatio(): number {
-  return window.devicePixelRatio || 1;
+  return window.devicePixelRatio;
 }
 
 export default getPixelRatio;

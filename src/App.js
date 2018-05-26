@@ -20,9 +20,9 @@ class App extends React.Component<Props, State> {
   };
   componentDidMount(): void {
     const performFetch = async (): Promise<void> => {
-      const comments = await fetchCommentThreads();
+      const comments = fetchCommentThreads();
       this.setState({comments});
-      setTimeout(performFetch, 300);
+      setTimeout(300, performFetch);
     };
     performFetch();
   }
@@ -32,7 +32,7 @@ class App extends React.Component<Props, State> {
         <h1>Join the conversation</h1>
         <ul>
           {this.state.comments.map(comment => (
-            <CommentThread comment={comment} depth={0} />
+            <CommentThread comment={comment} depth="0" />
           ))}
           <li>
             <CommentForm parentCommentID={null} />

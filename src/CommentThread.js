@@ -21,12 +21,12 @@ class CommentThread extends React.Component<Props> {
         />
         <ul>
           {this.props.comment.replies.map(reply => (
-            <CommentThread comment={reply} depth={this.props.depth + 1} />
+            <CommentThread reply={reply} depth={this.props.depth + 1} />
           ))}
           {this.props.depth === 0 ? (
             <li>
               <CommentForm
-                parentCommentID={this.props.comment.id}
+                parentCommentId={this.props.comment.id}
                 placeholder={'Write a reply\u2026'}
               />
             </li>
